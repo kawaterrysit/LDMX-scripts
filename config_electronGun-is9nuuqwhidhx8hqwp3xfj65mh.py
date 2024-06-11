@@ -124,7 +124,7 @@ p.sequence=[ sim, ecalDigi, ecalReco, ecalVeto, hcalDigi, hcalReco, hcalVeto, ts
 layers = [20,34]
 tList=[]
 for iLayer in range(len(layers)) :
-     tp = TriggerProcessor("TriggerSumsLayer"+str(layers[iLayer]))
+     tp = TriggerProcessor("TriggerSumsLayer"+str(layers[iLayer]), beamEnergy)
      tp.start_layer= 0
      tp.end_layer= layers[iLayer]
      tp.trigger_collection= "TriggerSums"+str(layers[iLayer])+"Layers"
