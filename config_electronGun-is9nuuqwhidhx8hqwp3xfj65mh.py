@@ -1,5 +1,7 @@
 #!/bin/python
 
+print("start")
+
 import sys
 import os
 import json
@@ -137,7 +139,6 @@ p.maxEvents = 100000
 p.run = 1
 
 p.keep = [ "drop MagnetScoringPlaneHits", "drop TrackerScoringPlaneHits", "drop HcalScoringPlaneHits"]
-
 try:
     p.outputFiles=["simoutput.root"]
     print("Simulation completed successfully.")
@@ -159,5 +160,5 @@ p.histogramFile = f'hist.root'
 with open('parameterDump.json', 'w') as outfile:
      json.dump(p.parameterDump(),  outfile, indent=4)
 
-
+print("done")
      
