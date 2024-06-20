@@ -36,7 +36,7 @@ sim.scoringPlanes = makeScoringPlanesPath(detector)
 # Set run parameters. These are all pulled from the job config 
 #
 p.run = 1
-Electrons = 1
+nElectrons = 10000
 beamEnergy=8;  #in GeV                                                                                                                                              
 
 sim.description = "Inclusive "+str(beamEnergy)+" GeV electron events, "+str(nElectrons)+"e"
