@@ -38,7 +38,7 @@ sim.scoringPlanes = makeScoringPlanesPath(detector)
 p.run = 1
 nElectrons = 10000
 beamEnergy=8;  #in GeV                                                                                                                                              
-#Unknown issue with str(nElectrons), replaced with the actual number to continue
+
 sim.description = "Inclusive "+str(beamEnergy)+" GeV electron events, "+str(nElectrons)+"e"
 sim.beamSpotSmear = [20., 80., 0]
 
