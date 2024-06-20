@@ -138,12 +138,13 @@ p.sequence.extend( tList )
 p.maxEvents = 100000
 p.run = 1
 
-#p.keep = [ "drop MagnetScoringPlaneHits", "drop TrackerScoringPlaneHits", "drop HcalScoringPlaneHits"]
+p.keep = [ "drop MagnetScoringPlaneHits", "drop TrackerScoringPlaneHits", "drop HcalScoringPlaneHits"]
 
 #p.outputFiles=["simoutput.root"]
 try:
     p.outputFiles=["simoutput.root"]
-    print("s1.")
+    #print("s1.")
+    print("Simulation configured to produce output files:", p.outputFiles, "and histogram file:", p.histogramFile)
 except Exception as e:
     print(f"f1")
 
