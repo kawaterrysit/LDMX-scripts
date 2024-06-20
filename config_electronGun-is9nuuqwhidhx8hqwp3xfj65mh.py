@@ -141,13 +141,11 @@ p.run = 1
 p.keep = [ "drop MagnetScoringPlaneHits", "drop TrackerScoringPlaneHits", "drop HcalScoringPlaneHits"]
 
 #p.outputFiles=["simoutput.root"]
-try:
-    p.outputFiles=["simoutput.root"]
-    #print("s1.")
-    print("Simulation configured to produce output files:", p.outputFiles, "and histogram file:", p.histogramFile)
-except Exception as e:
-    print(f"f1")
 
+
+p.histogramFile = os.getenv('HISTOGRAM_FILE', 'default_hist.root')    
+    
+    
 p.termLogLevel = 1  # default is 2 (WARNING); but then logFrequency is ignored. level 1 = INFO.
 
 #print this many events to stdout (independent on number of events, edge case: round-off effects when not divisible. so can go up by a factor 2 or so)
@@ -161,13 +159,15 @@ json.dumps(p.parameterDump(), indent=2)
 #p.histogramFile = f'hist.root'
 
 try:
-    p.histogramFile = f'hist.root'
+    p.histogramFile = 'hist.root'
     print("s2.")
 except Exception as e:
     print(f"f2")
 
+ 
+    
 with open('parameterDump.json', 'w') as outfile:
      json.dump(p.parameterDump(),  outfile, indent=4)
 
-print("done")
+print("Simulation configured to produce output files:", p.outputFiles, "and histogram file:", p.histogramFile)
      
