@@ -138,12 +138,14 @@ p.sequence.extend( tList )
 p.maxEvents = 100000
 p.run = 1
 
-p.keep = [ "drop MagnetScoringPlaneHits", "drop TrackerScoringPlaneHits", "drop HcalScoringPlaneHits"]
+#p.keep = [ "drop MagnetScoringPlaneHits", "drop TrackerScoringPlaneHits", "drop HcalScoringPlaneHits"]
+
+#p.outputFiles=["simoutput.root"]
 try:
     p.outputFiles=["simoutput.root"]
-    print("Simulation completed successfully.")
+    print("s1.")
 except Exception as e:
-    print(f"Simulation failed")
+    print(f"f1")
 
 p.termLogLevel = 1  # default is 2 (WARNING); but then logFrequency is ignored. level 1 = INFO.
 
@@ -155,7 +157,13 @@ p.logFrequency = int( p.maxEvents/logEvents )
 
 json.dumps(p.parameterDump(), indent=2)
 
-p.histogramFile = f'hist.root'
+#p.histogramFile = f'hist.root'
+
+try:
+    p.histogramFile = f'hist.root'
+    print("s2.")
+except Exception as e:
+    print(f"f2")
 
 with open('parameterDump.json', 'w') as outfile:
      json.dump(p.parameterDump(),  outfile, indent=4)
