@@ -12,6 +12,8 @@ from LDMX.Framework import ldmxcfg
 passName="sim"
 p=ldmxcfg.Process(passName)
 
+p.maxTriesPerEvent = 1
+
 #import all processors
 from LDMX.SimCore import generators
 from LDMX.SimCore import simulator
@@ -36,7 +38,7 @@ sim.scoringPlanes = makeScoringPlanesPath(detector)
 # Set run parameters. These are all pulled from the job config 
 #
 p.run = 1
-nElectrons = 10000
+nElectrons = 1
 beamEnergy=8;  #in GeV                                                                                                                                              
 
 sim.description = "Inclusive "+str(beamEnergy)+" GeV electron events, "+str(nElectrons)+"e"
@@ -131,10 +133,11 @@ for iLayer in range(len(layers)) :
      tList.append(tp)
 p.sequence.extend( tList ) 
 
+p.maxEvents = 100000
+p.run = 1
+
 p.keep = [ "drop MagnetScoringPlaneHits", "drop TrackerScoringPlaneHits", "drop HcalScoringPlaneHits"]
 p.outputFiles=["simoutput.root"]
-
-p.maxEvents = 10
 
 p.termLogLevel = 1  # default is 2 (WARNING); but then logFrequency is ignored. level 1 = INFO.
 
