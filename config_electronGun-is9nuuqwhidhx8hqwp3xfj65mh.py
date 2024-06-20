@@ -137,7 +137,12 @@ p.maxEvents = 100000
 p.run = 1
 
 p.keep = [ "drop MagnetScoringPlaneHits", "drop TrackerScoringPlaneHits", "drop HcalScoringPlaneHits"]
-p.outputFiles=["simoutput.root"]
+
+try:
+    p.outputFiles=["simoutput.root"]
+    print("Simulation completed successfully.")
+except Exception as e:
+    print(f"Simulation failed")
 
 p.termLogLevel = 1  # default is 2 (WARNING); but then logFrequency is ignored. level 1 = INFO.
 
