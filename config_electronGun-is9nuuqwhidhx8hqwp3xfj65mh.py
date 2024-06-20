@@ -3,6 +3,7 @@
 import sys
 import os
 import json
+import root
 
 print("Current working directory:", os.getcwd())
 
@@ -139,12 +140,8 @@ p.maxEvents = 100000
 p.run = 1
 
 p.keep = [ "drop MagnetScoringPlaneHits", "drop TrackerScoringPlaneHits", "drop HcalScoringPlaneHits"]
+p.outputFiles=["simoutput.root"]
 
-#p.outputFiles=["simoutput.root"]
-
-
-p.histogramFile = os.getenv('HISTOGRAM_FILE', 'default_hist.root')    
-    
     
 p.termLogLevel = 1  # default is 2 (WARNING); but then logFrequency is ignored. level 1 = INFO.
 
@@ -156,18 +153,13 @@ p.logFrequency = int( p.maxEvents/logEvents )
 
 json.dumps(p.parameterDump(), indent=2)
 
-#p.histogramFile = f'hist.root'
-
-try:
-    p.histogramFile = 'hist.root'
-    print("s2.")
-except Exception as e:
-    print(f"f2")
 
  
     
 with open('parameterDump.json', 'w') as outfile:
      json.dump(p.parameterDump(),  outfile, indent=4)
+
+p.histogramFile = f'hist.root'
 
 print("Simulation configured to produce output files:", p.outputFiles, "and histogram file:", p.histogramFile)
      
