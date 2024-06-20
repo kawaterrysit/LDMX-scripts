@@ -1,10 +1,10 @@
 #!/bin/python
 
-print("start")
-
 import sys
 import os
 import json
+
+print("Current working directory:", os.getcwd())
 
 # we need the ldmx configuration package to construct the object
 
