@@ -3,7 +3,6 @@
 import sys
 import os
 import json
-import root
 
 print("Current working directory:", os.getcwd())
 
@@ -143,6 +142,7 @@ p.maxEvents = 100000
 p.run = 1
 
 p.keep = [ "drop MagnetScoringPlaneHits", "drop TrackerScoringPlaneHits", "drop HcalScoringPlaneHits"]
+
 p.outputFiles=["simoutput.root"]
 p.histogramFile = f'hist.root'
 
