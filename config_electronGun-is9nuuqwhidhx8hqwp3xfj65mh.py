@@ -139,7 +139,7 @@ p.sequence.extend( tList )
 print(tList)
 print(p)
 
-p.maxEvents = 100000
+p.maxEvents = 100
 p.run = 1
 
 p.keep = [ "drop MagnetScoringPlaneHits", "drop TrackerScoringPlaneHits", "drop HcalScoringPlaneHits"]
