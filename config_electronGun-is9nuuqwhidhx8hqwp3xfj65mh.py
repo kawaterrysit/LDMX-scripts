@@ -4,7 +4,7 @@ import sys
 import os
 import json
 
-print("Current working directory:", os.getcwd())
+#print("Current working directory:", os.getcwd())
 
 # we need the ldmx configuration package to construct the object
 
@@ -40,7 +40,7 @@ sim.scoringPlanes = makeScoringPlanesPath(detector)
 # Set run parameters. These are all pulled from the job config 
 #
 p.run = 1
-nElectrons = 1
+nElectrons = 1000
 beamEnergy=8.0  #in GeV  
 print(f"beamEnergy: {beamEnergy}, type: {type(beamEnergy)}")                                                         
 
@@ -139,7 +139,7 @@ p.sequence.extend( tList )
 print(tList)
 print(p)
 
-p.maxEvents = 100
+p.maxEvents = 100000
 p.run = 1
 
 p.keep = [ "drop MagnetScoringPlaneHits", "drop TrackerScoringPlaneHits", "drop HcalScoringPlaneHits"]
