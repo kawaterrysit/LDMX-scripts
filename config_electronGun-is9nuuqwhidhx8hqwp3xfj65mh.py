@@ -40,7 +40,7 @@ sim.scoringPlanes = makeScoringPlanesPath(detector)
 # Set run parameters. These are all pulled from the job config 
 #
 p.run = 1
-nKaons0 = 1000
+nKaons0 = 10
 beamEnergy=8.0  #in GeV  
 print(f"beamEnergy: {beamEnergy}, type: {type(beamEnergy)}")                                                         
 
