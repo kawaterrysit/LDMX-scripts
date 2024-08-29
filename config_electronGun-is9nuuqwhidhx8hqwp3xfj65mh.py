@@ -51,7 +51,7 @@ sim.beamSpotSmear = [20., 80., 0]
 mpgGen = generators.multi( "mgpGen" ) # this is the line that actually creates the generator                                                                            
 mpgGen.vertex = [ -44., 0., -880. ] # mm                                                                                                                              
 mpgGen.nParticles = nElectrons
-mpgGen.pdgID = 311
+mpgGen.pdgID = 11
 mpgGen.enablePoisson = False #True                                                                                                                                      
 
 import math
