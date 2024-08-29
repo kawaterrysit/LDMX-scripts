@@ -40,17 +40,17 @@ sim.scoringPlanes = makeScoringPlanesPath(detector)
 # Set run parameters. These are all pulled from the job config 
 #
 p.run = 1
-nKaons0 = 10
+nElectrons = 1
 beamEnergy=8.0  #in GeV  
 print(f"beamEnergy: {beamEnergy}, type: {type(beamEnergy)}")                                                         
 
-sim.description = "Inclusive "+str(beamEnergy)+" GeV electron events, "+str(nKaons0)+"e"
+sim.description = "Inclusive "+str(beamEnergy)+" GeV Electrons events, "+str(nElectrons)+"Electrons"
 sim.beamSpotSmear = [20., 80., 0]
 
 
 mpgGen = generators.multi( "mgpGen" ) # this is the line that actually creates the generator                                                                            
 mpgGen.vertex = [ -44., 0., -880. ] # mm                                                                                                                              
-mpgGen.nParticles = nKaons0
+mpgGen.nParticles = nElectrons
 mpgGen.pdgID = 311
 mpgGen.enablePoisson = False #True                                                                                                                                      
 
@@ -139,7 +139,7 @@ p.sequence.extend( tList )
 print(tList)
 print(p)
 
-p.maxEvents = 100000
+p.maxEvents = 10000
 p.run = 1
 
 p.keep = [ "drop MagnetScoringPlaneHits", "drop TrackerScoringPlaneHits", "drop HcalScoringPlaneHits"]
