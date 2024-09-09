@@ -98,6 +98,8 @@ ecalDigi   =eDigi.EcalDigiProducer('EcalDigis')
 ecalReco   =eDigi.EcalRecProducer('ecalRecon')
 ecalVeto   =vetos.EcalVetoProcessor('ecalVetoBDT')
 
+'''
+
 #hcal digi chain
 hcalDigi   =hDigi.HcalDigiProducer('hcalDigis')
 hcalReco   =hDigi.HcalRecProducer('hcalRecon')                  
@@ -119,10 +121,14 @@ tsClustersDown  =TrigScintClusterProducer.pad3()
 
 trigScintTrack.delta_max = 0.75 
 
+'''
 
 from LDMX.DQM import dqm
 
-p.sequence=[ sim, ecalDigi, ecalReco, ecalVeto] + dqm.ecal_dqm
+#p.sequence=[ sim, ecalDigi, ecalReco, ecalVeto, hcalDigi, hcalReco, hcalVeto, tsDigisTag, tsDigisUp, tsDigisDown, tsClustersTag, tsClustersUp, tsClustersDown, trigScintTrack ] + dqm.ecal_dqm
+
+p.sequence=[ sim, ecalDigi, ecalReco, ecalVeto, hcalDigi, hcalReco, hcalVeto] + dqm.ecal_dqm
+
 #hcal digi keeps crashing in config step
 #p.sequence=[ sim, ecalDigi, ecalReco, ecalVeto, tsDigisTag, tsDigisUp, tsDigisDown, tsClustersTag, tsClustersUp, tsClustersDown, trigScintTrack, eCount ]
 
