@@ -127,7 +127,7 @@ from LDMX.DQM import dqm
 
 #p.sequence=[ sim, ecalDigi, ecalReco, ecalVeto, hcalDigi, hcalReco, hcalVeto, tsDigisTag, tsDigisUp, tsDigisDown, tsClustersTag, tsClustersUp, tsClustersDown, trigScintTrack ] + dqm.ecal_dqm
 
-p.sequence=[ sim, ecalDigi, ecalReco, ecalVeto, hcalDigi, hcalReco, hcalVeto] + dqm.ecal_dqm
+p.sequence=[ sim, ecalDigi, ecalReco, ecalVeto] + dqm.ecal_dqm
 
 #hcal digi keeps crashing in config step
 #p.sequence=[ sim, ecalDigi, ecalReco, ecalVeto, tsDigisTag, tsDigisUp, tsDigisDown, tsClustersTag, tsClustersUp, tsClustersDown, trigScintTrack, eCount ]
