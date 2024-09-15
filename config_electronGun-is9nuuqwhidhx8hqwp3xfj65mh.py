@@ -62,7 +62,7 @@ py = 0.;
 pz= beamEnergyMeV*math.cos(theta)
 mpgGen.momentum = [ px, py, pz ]
 
-#
+##
 # Set the multiparticle gun as generator
 #
 sim.generators = [ mpgGen ]
