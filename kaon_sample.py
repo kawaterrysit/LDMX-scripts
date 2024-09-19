@@ -118,5 +118,5 @@ p.sequence=[
 #p.sequence.extend(dqm.all_dqm)
 
 
-p.histogramFile = f'hist.root'
-p.outputFiles = [f'events.root']
+p.histogramFile = f'sample_hist.root'
+p.outputFiles = [f'sample_events.root']
