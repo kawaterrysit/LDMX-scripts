@@ -89,9 +89,6 @@ from LDMX.TrigScint.trigScint import trigScintTrack
 
 from LDMX.Recon.electronCounter import ElectronCounter
 
-for d in tsDigis :
-    d.randomSeed = 1
-
 
 # ECAL part
 ecalReco   =eDigi.EcalRecProducer()
