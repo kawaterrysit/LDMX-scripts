@@ -120,7 +120,7 @@ p.sequence=[
 #        eCount
         ]
 
-#p.sequence.extend(dqm.all_dqm)
+p.sequence.extend(dqm.all_dqm)
 
 
 p.histogramFile = f'hist.root'
