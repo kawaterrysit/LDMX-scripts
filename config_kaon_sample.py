@@ -110,7 +110,7 @@ p.sequence=[
         ecalReco, 
 #        ecalVeto,
 #        eCount
-        ]
+        ] + dqm.ecal_dqm
 
 #p.sequence.extend(dqm.all_dqm)
 
