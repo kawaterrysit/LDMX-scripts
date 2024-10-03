@@ -999,7 +999,7 @@ void EcalVetoProcessor::produce(framework::Event &event) {
     hitNums[0] = hitsInRegion[iHit];
     for (int jHit = 1; jHit < nHitsInRegion - 1; jHit++) {
       //trackingHitList -> hitsInRegion; 
-      if (hitsInRegion < 3) break;
+      if (nHitsInRegion < 3) break;
       hitNums[1] = hitsInRegion[jHit];
       for (int kHit = jHit + 1; kHit < nHitsInRegion; kHit++) {
         hitNums[2] = hitsInRegion[kHit];
