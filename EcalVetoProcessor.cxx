@@ -988,16 +988,14 @@ void EcalVetoProcessor::produce(framework::Event &event) {
       // This distance needs to be optimized in a future study //TODO
       // Current 2*cellWidth has no particular meaning
       if (dstToHit <= 2 * cellWidth) {
-        // jHit -> trackingHitList[jHit]
-        hitsInRegion[nHitsInRegion] = trackingHitList[jHit]; // TODO
+        hitsInRegion[nHitsInRegion] = jHit; // TODO
         nHitsInRegion++;
       }
     }
 
     // Look at combinations of hits within the region (do not consider the same
     // combination twice):
-    // iHit -> hitsInRegion[iHit] etc
-    // iHit might have no issue prior to this change, but jHit and kHit should have
+    //iHit -> hitsInRegion[iHit] etc
     hitNums[0] = hitsInRegion[iHit];
     for (int jHit = 1; jHit < nHitsInRegion - 1; jHit++) {
       //trackingHitList -> hitsInRegion; 
