@@ -987,7 +987,7 @@ void EcalVetoProcessor::produce(framework::Event &event) {
           (trackingHitList[iHit].pos - trackingHitList[jHit].pos).Mag();
       // This distance needs to be optimized in a future study //TODO
       // Current 2*cellWidth has no particular meaning
-      if (dstToHit <= 2 * cellWidth) {
+      if (dstToHit <= 3 * cellWidth) {
         hitsInRegion[nHitsInRegion] = jHit; // TODO
         nHitsInRegion++;
       }
@@ -998,7 +998,7 @@ void EcalVetoProcessor::produce(framework::Event &event) {
     //iHit -> hitsInRegion[iHit] etc
     hitNums[0] = hitsInRegion[iHit];
     for (int jHit = 1; jHit < nHitsInRegion - 1; jHit++) {
-      //trackingHitList -> hitsInRegion; 
+      //trackingHitList.size() -> hitsInRegion.size() but .size() does not work so I use nHitsInRegion instead 
       if (nHitsInRegion < 3) break;
       hitNums[1] = hitsInRegion[jHit];
       for (int kHit = jHit + 1; kHit < nHitsInRegion; kHit++) {
