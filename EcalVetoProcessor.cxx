@@ -19,25 +19,13 @@
 #include <algorithm>
 #include <cmath>
 #include <fstream>
-#include <iostream>
 
 // ROOT (MIP tracking)
 #include "TDecompSVD.h"
 #include "TMatrixD.h"
 #include "TVector3.h"
 
-namespace ecal {
-
-# for linear regression
-void produce() {
-    std::ifstream file("/home/terrysit/flytime/EcalVetoProcessor/lin_reg_parameters.txt");
-    double HitsRegion;
-
-    file >> HitsRegion;  // Read the value directly from the file
-    file.close();
-}    
-    
-    
+namespace ecal {    
     
 void EcalVetoProcessor::buildBDTFeatureVector(
     const ldmx::EcalVetoResult &result) {
@@ -969,6 +957,11 @@ void EcalVetoProcessor::produce(framework::Event &event) {
 
   // ------------------------------------------------------
   // Linreg tracking:
+    
+  std::ifstream file("parameters.txt");
+  double HitsRegion;
+  file >> HitsRegion;  // Read the value from the file
+  file.close(); 
 
   ldmx_log(debug) << "Finding linreg tracks from " << trackingHitList.size()
                   << " hits";
