@@ -962,7 +962,7 @@ void EcalVetoProcessor::produce(framework::Event &event) {
 #include <iostream>
 
 void produce() {
-    std::ifstream file("parameters.txt");
+    std::ifstream file("/home/terrysit/flytime/EcalVetoProcessor/lin_reg_parameters.txt");
     double HitsRegion;
 
     file >> HitsRegion;  // Read the value directly from the file
@@ -970,9 +970,6 @@ void produce() {
 
     // Now HitsRegion contains the value from the Python script
     std::cout << "HitsRegion: " << HitsRegion << std::endl;
-
-    // Use HitsRegion in your logic
-    // Example: if (dstToHit <= 2 * HitsRegion) { /* your logic here */ }
 }
 
 
