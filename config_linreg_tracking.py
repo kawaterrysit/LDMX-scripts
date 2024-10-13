@@ -16,6 +16,10 @@ p.totalEvents = int(os.environ['LDMX_NUM_EVENTS']) // 2
 p.run = int(os.environ['LDMX_RUN_NUMBER'])
 p.inputFiles = ['/home/terrysit/flytime/sample_kaon/sample_events.root']
 
+lin_reg_parameters = {
+    'HitsRegion': 40,
+}
+
 
 from LDMX.SimCore import generators as gen
 from LDMX.SimCore import bias_operators
