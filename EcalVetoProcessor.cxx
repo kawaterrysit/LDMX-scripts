@@ -958,11 +958,23 @@ void EcalVetoProcessor::produce(framework::Event &event) {
   // ------------------------------------------------------
   // Linreg tracking:
     
-#include <nlohmann/json.hpp>
-#include <fstream>  // for reading files
-nlohmann::json json_params;
-std::ifstream file("/home/terrysit/flytime/EcalVetoProcessor/lin_reg_parameters.json");
-double HitsRegion = json_params["HitsRegion"];
+#include <fstream>
+#include <iostream>
+
+void produce() {
+    std::ifstream file("parameters.txt");
+    double HitsRegion;
+
+    file >> HitsRegion;  // Read the value directly from the file
+    file.close();
+
+    // Now HitsRegion contains the value from the Python script
+    std::cout << "HitsRegion: " << HitsRegion << std::endl;
+
+    // Use HitsRegion in your logic
+    // Example: if (dstToHit <= 2 * HitsRegion) { /* your logic here */ }
+}
+
 
   ldmx_log(debug) << "Finding linreg tracks from " << trackingHitList.size()
                   << " hits";
