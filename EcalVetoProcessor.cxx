@@ -961,7 +961,7 @@ void EcalVetoProcessor::produce(framework::Event &event) {
 #include <nlohmann/json.hpp>
 #include <fstream>  // for reading files
 nlohmann::json json_params;
-std::ifstream file("lin_reg_parameters.json");
+std::ifstream file("/home/terrysit/flytime/EcalVetoProcessor/lin_reg_parameters.json");
 double HitsRegion = json_params["HitsRegion"];
 
   ldmx_log(debug) << "Finding linreg tracks from " << trackingHitList.size()
