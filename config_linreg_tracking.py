@@ -16,9 +16,12 @@ p.totalEvents = int(os.environ['LDMX_NUM_EVENTS']) // 2
 p.run = int(os.environ['LDMX_RUN_NUMBER'])
 p.inputFiles = ['/home/terrysit/flytime/sample_kaon/sample_events.root']
 
+import json
 lin_reg_parameters = {
     'HitsRegion': 40,
 }
+with open("lin_reg_parameters.json", "w") as f:
+    json.dump(lin_reg_parameters, f)
 
 
 from LDMX.SimCore import generators as gen
