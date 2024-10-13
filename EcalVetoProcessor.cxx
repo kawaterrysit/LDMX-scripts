@@ -19,6 +19,7 @@
 #include <algorithm>
 #include <cmath>
 #include <fstream>
+#include <iostream>
 
 // ROOT (MIP tracking)
 #include "TDecompSVD.h"
@@ -27,6 +28,17 @@
 
 namespace ecal {
 
+# for linear regression
+void produce() {
+    std::ifstream file("/home/terrysit/flytime/EcalVetoProcessor/lin_reg_parameters.txt");
+    double HitsRegion;
+
+    file >> HitsRegion;  // Read the value directly from the file
+    file.close();
+}    
+    
+    
+    
 void EcalVetoProcessor::buildBDTFeatureVector(
     const ldmx::EcalVetoResult &result) {
   // Base variables
@@ -957,21 +969,6 @@ void EcalVetoProcessor::produce(framework::Event &event) {
 
   // ------------------------------------------------------
   // Linreg tracking:
-    
-#include <fstream>
-#include <iostream>
-
-void produce() {
-    std::ifstream file("/home/terrysit/flytime/EcalVetoProcessor/lin_reg_parameters.txt");
-    double HitsRegion;
-
-    file >> HitsRegion;  // Read the value directly from the file
-    file.close();
-
-    // Now HitsRegion contains the value from the Python script
-    std::cout << "HitsRegion: " << HitsRegion << std::endl;
-}
-
 
   ldmx_log(debug) << "Finding linreg tracks from " << trackingHitList.size()
                   << " hits";
