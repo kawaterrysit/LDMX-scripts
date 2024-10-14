@@ -17,11 +17,6 @@ p.run = int(os.environ['LDMX_RUN_NUMBER'])
 p.inputFiles = ['/home/terrysit/flytime/sample_kaon/sample_events.root']
 
 
-HitsRegion = 40
-with open('lin_reg_parameters.txt', 'w') as f:
-    f.write(f"{HitsRegion}")
-
-
 from LDMX.SimCore import generators as gen
 from LDMX.SimCore import bias_operators
 from LDMX.SimCore import kaon_physics
@@ -103,10 +98,33 @@ for d in tsDigis :
     d.randomSeed = 1
 '''
 
+
+layerZPositions = [ 
+    7.932, 14.532, 32.146, 40.746, 58.110, 67.710, 86.574, 96.774, 115.638, 125.838, 
+    144.702, 154.902, 173.766, 183.966, 202.830, 213.030, 231.894, 242.094, 260.958, 
+    271.158, 290.022, 300.222, 319.086, 329.286, 351.650, 365.250, 387.614, 401.214, 
+    423.578, 437.178, 459.542, 473.142, 495.506, 509.106
+]
+
+layer_diff_raw = []
+
+for i in range(len(layerZPositions)):
+    for j in range(len(layerZPositions)):
+        if i != j:  # To avoid calculating difference between the same element
+            diff = layerZPositions[i] - layerZPositions[j]
+            differences.append(int(diff))
+
+# Remove duplicates and sort the differences from smallest to largest
+layer_diff = sorted(list(set(layer_diff_raw)))
+
+print(layer_diff)
+
+
 # ECAL part
 #ecalReco   =eDigi.EcalRecProducer()
 #ecalDigi = eDigi.EcalDigiProducer()
 ecalVeto   =vetos.EcalVetoProcessor()
+ecalVeto.linreg_dist = max(layer_diff)
 
 # electron counter for trigger processor 
 #eCount = ElectronCounter( 1, "ElectronCounter") # first argument is number of electrons in simulation
