@@ -127,11 +127,13 @@ void EcalVetoProcessor::configure(framework::config::Parameters &parameters) {
   ecalLayerTime_.resize(nEcalLayers_, 0);
 
   beamEnergyMeV_ = parameters.getParameter<double>("beam_energy");
+  linreg_dist_ = parameters.getParameter<float>("linreg_dist");
 
   // Set the collection name as defined in the configuration
   collectionName_ = parameters.getParameter<std::string>("collection_name");
   rec_pass_name_ = parameters.getParameter<std::string>("rec_pass_name");
   rec_coll_name_ = parameters.getParameter<std::string>("rec_coll_name");
+  
 }
 
 void EcalVetoProcessor::clearProcessor() {
@@ -958,13 +960,9 @@ void EcalVetoProcessor::produce(framework::Event &event) {
   // ------------------------------------------------------
   // Linreg tracking:
     
-  std::ifstream file("parameters.txt");
-  double HitsRegion;
-  file >> HitsRegion;  // Read the value from the file
-  file.close(); 
 
   ldmx_log(debug) << "Finding linreg tracks from " << trackingHitList.size()
-                  << " hits";
+                  << " hits within a distance of " << linreg_dist_;
 
   for (int iHit = 0; iHit < trackingHitList.size(); iHit++) {
     int track[34];
@@ -994,7 +992,7 @@ void EcalVetoProcessor::produce(framework::Event &event) {
       // This distance needs to be optimized in a future study //TODO
       // Current 2*cellWidth has no particular meaning
 
-      if (dstToHit <= 2 * HitsRegion) {
+      if (dstToHit <= 2 * linreg_dist_) {
         hitsInRegion[nHitsInRegion] = jHit; // TODO
         nHitsInRegion++;
       }
