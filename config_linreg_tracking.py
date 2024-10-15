@@ -13,8 +13,10 @@ p.maxEvents = 1
 # kaon-focused sample takes about twice as long as normal PN,
 # so we ask for half as many events such that validation jobs stay
 # time-limited by the PN
-p.totalEvents = int(os.environ['LDMX_NUM_EVENTS']) // 2
-p.run = int(os.environ['LDMX_RUN_NUMBER'])
+
+LDMX_NUM_EVENTS = 10000
+p.totalEvents = int(LDMX_NUM_EVENTS) // 2
+p.run = int(LDMX_NUM_EVENTS)
 p.inputFiles = ['/home/terrysit/flytime/sample_kaon/sample_events.root']
 
 
@@ -107,23 +109,18 @@ layerZPositions = [
     423.578, 437.178, 459.542, 473.142, 495.506, 509.106
 ]
 
-layer_ZPos_diff = np.round(np.diff(layerZPositions))
+layer_ZPos_diff = np.round(np.diff(layerZPositions), decimals=2)
 
 
 # Taking absolute values, remove duplicates,and sort the differences from smallest to largest
-layer_ZPos_diff = [abs(x) for x in layer_ZPos_diff ]
-layer_ZPos_diff = sorted(list(set(layer_ZPos_diff)))
-
-print(layer_ZPos_diff)
-print("the length of layer_ZPos_diff is",len(layer_ZPos_diff))
-
+layer_ZPos_diff = sorted(list(set([abs(x) for x in layer_ZPos_diff])))
 
 # ECAL part
 #ecalReco   =eDigi.EcalRecProducer()
 #ecalDigi = eDigi.EcalDigiProducer()
-ecalVeto   =vetos.EcalVetoProcessor()
-ecalVeto.linreg_dist = layer_ZPos_diff[0]
-print(layer_ZPos_diff[0])
+ecalVeto = vetos.EcalVetoProcessor()
+ecalVeto.linreg_dist = float(layer_ZPos_diff[7])
+
 
 # electron counter for trigger processor 
 #eCount = ElectronCounter( 1, "ElectronCounter") # first argument is number of electrons in simulation
