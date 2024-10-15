@@ -1,5 +1,6 @@
 import os
 import sys
+import numpy as np
 
 from LDMX.Framework import ldmxcfg
 
@@ -106,7 +107,8 @@ layerZPositions = [
     423.578, 437.178, 459.542, 473.142, 495.506, 509.106
 ]
 
-layer_ZPos_diff = np.diff(layerZPositions)
+layer_ZPos_diff = np.round(np.diff(layerZPositions))
+
 
 # Taking absolute values, remove duplicates,and sort the differences from smallest to largest
 layer_ZPos_diff = [abs(x) for x in layer_ZPos_diff ]
@@ -120,7 +122,7 @@ print("the length of layer_ZPos_diff is",len(layer_ZPos_diff))
 #ecalReco   =eDigi.EcalRecProducer()
 #ecalDigi = eDigi.EcalDigiProducer()
 ecalVeto   =vetos.EcalVetoProcessor()
-ecalVeto.linreg_dist = max(layer_ZPos_diff[0])
+ecalVeto.linreg_dist = layer_ZPos_diff[0]
 print(layer_ZPos_diff[0])
 
 # electron counter for trigger processor 
