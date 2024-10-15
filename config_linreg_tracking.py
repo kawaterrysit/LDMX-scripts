@@ -106,25 +106,22 @@ layerZPositions = [
     423.578, 437.178, 459.542, 473.142, 495.506, 509.106
 ]
 
-layer_diff_raw = []
+layer_ZPos_diff = np.diff(layerZPositions)
 
-for i in range(len(layerZPositions)):
-    for j in range(len(layerZPositions)):
-        if i != j:  # To avoid calculating difference between the same element
-            diff = layerZPositions[i] - layerZPositions[j]
-            differences.append(int(diff))
+# Taking absolute values, remove duplicates,and sort the differences from smallest to largest
+layer_ZPos_diff = [abs(x) for x in layer_ZPos_diff ]
+layer_ZPos_diff = sorted(list(set(layer_ZPos_diff)))
 
-# Remove duplicates and sort the differences from smallest to largest
-layer_diff = sorted(list(set(layer_diff_raw)))
-
-print(layer_diff)
+print(layer_ZPos_diff)
+print("the length of layer_ZPos_diff is",len(layer_ZPos_diff))
 
 
 # ECAL part
 #ecalReco   =eDigi.EcalRecProducer()
 #ecalDigi = eDigi.EcalDigiProducer()
 ecalVeto   =vetos.EcalVetoProcessor()
-ecalVeto.linreg_dist = max(layer_diff)
+ecalVeto.linreg_dist = max(layer_ZPos_diff[0])
+print(layer_ZPos_diff[0])
 
 # electron counter for trigger processor 
 #eCount = ElectronCounter( 1, "ElectronCounter") # first argument is number of electrons in simulation
