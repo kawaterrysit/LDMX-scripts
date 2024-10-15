@@ -17,7 +17,7 @@ p.maxEvents = 1
 LDMX_NUM_EVENTS = 10000
 p.totalEvents = int(LDMX_NUM_EVENTS) // 2
 p.run = int(LDMX_NUM_EVENTS)
-p.inputFiles = ['/home/terrysit/flytime/sample_kaon/sample_events.root']
+p.inputFiles = ['/home/terrysit/ldmx-sw/aproject/sample_kaon/sample_events.root']
 
 
 from LDMX.SimCore import generators as gen
