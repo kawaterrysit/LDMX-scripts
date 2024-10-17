@@ -127,7 +127,7 @@ void EcalVetoProcessor::configure(framework::config::Parameters &parameters) {
   ecalLayerTime_.resize(nEcalLayers_, 0);
 
   beamEnergyMeV_ = parameters.getParameter<double>("beam_energy");
-  linreg_dist_ = parameters.getParameter<float>("linreg_dist");
+  linreg_dist_ = parameters.getParameter<double>("linreg_dist");
 
   // Set the collection name as defined in the configuration
   collectionName_ = parameters.getParameter<std::string>("collection_name");
@@ -992,7 +992,8 @@ void EcalVetoProcessor::produce(framework::Event &event) {
       // This distance needs to be optimized in a future study //TODO
       // Current 2*cellWidth has no particular meaning
       
-      float linreg_dist_ = (float)linreg_dist_;
+      float linreg_dist_ = <float>(linreg_dist);
+       
       if (dstToHit <= 2 * linreg_dist_) {
         hitsInRegion[nHitsInRegion] = jHit; // TODO
         nHitsInRegion++;
