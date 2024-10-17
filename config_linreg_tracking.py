@@ -109,7 +109,7 @@ layerZPositions = [
     423.578, 437.178, 459.542, 473.142, 495.506, 509.106
 ]
 
-layer_ZPos_diff = np.round(np.diff(layerZPositions), decimals=2)
+layer_ZPos_diff = np.round(np.diff(layerZPositions), decimals=0)
 
 
 # Taking absolute values, remove duplicates,and sort the differences from smallest to largest
