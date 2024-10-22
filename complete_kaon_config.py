@@ -115,10 +115,26 @@ tsClustersDown.input_pass_name = tsClustersTag.input_pass_name
 trigScintTrack.input_pass_name = thisPassName
 trigScintTrack.seeding_collection = tsClustersTag.output_collection
 
+
+
+layerZPositions = [ 
+    7.932, 14.532, 32.146, 40.746, 58.110, 67.710, 86.574, 96.774, 115.638, 125.838, 
+    144.702, 154.902, 173.766, 183.966, 202.830, 213.030, 231.894, 242.094, 260.958, 
+    271.158, 290.022, 300.222, 319.086, 329.286, 351.650, 365.250, 387.614, 401.214, 
+    423.578, 437.178, 459.542, 473.142, 495.506, 509.106
+]
+
+layer_ZPos_diff = np.round(np.diff(layerZPositions), decimals=0)
+
+
+# Taking absolute values, remove duplicates,and sort the differences from smallest to largest
+layer_ZPos_diff = sorted(list(set([abs(x) for x in layer_ZPos_diff])))
+
 # ECAL part
 ecalReco   =eDigi.EcalRecProducer()
 ecalDigi = eDigi.EcalDigiProducer()
 ecalVeto   =vetos.EcalVetoProcessor()
+ecalVeto.linreg_dist = float(layer_ZPos_diff[7])
 
 # HCAL part
 hcalDigi   =hDigi.HcalDigiProducer()
