@@ -992,14 +992,14 @@ void EcalVetoProcessor::produce(framework::Event &event) {
       // This distance needs to be optimized in a future study //TODO
       // Current 2*cellWidth has no particular meaning
       
-      float linreg_dist_ = <float>(linreg_dist);
+      float linreg_dist_float = <float>(linreg_dist_);
        
-      if (dstToHit <= 2 * linreg_dist_) {
+      if (dstToHit <= 2 * linreg_dist_float) {
         hitsInRegion[nHitsInRegion] = jHit; // TODO
         nHitsInRegion++;
       }
       ldmx_log(debug) << "Number of Hits in Region:" << nHitsInRegion;
-   
+      ldmx_log(debug) << "linreg_dist_float:" << linreg_dist_float;
     }
 
     // Look at combinations of hits within the region (do not consider the same
