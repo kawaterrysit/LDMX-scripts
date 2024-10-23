@@ -1018,14 +1018,11 @@ void EcalVetoProcessor::produce(framework::Event &event) {
                          trackingHitList[hitNums[1]].pos(hInd) +
                          trackingHitList[hitNums[2]].pos(hInd)) /
                         3.0;
-          ldmx_log(debug) << "jHit:" << jHit;
-          ldmx_log(debug) << "kHit:" << kHit;
         }
         for (int hInd = 0; hInd < 3; hInd++) {
           for (int lInd = 0; lInd < 3; lInd++) {
             hdt(hInd, lInd) =
                 trackingHitList[hitNums[hInd]].pos(lInd) - hmean(lInd);
-            ldmx_log(debug) << "hInd:" << hInd;
           }
         }
 
@@ -1049,6 +1046,8 @@ void EcalVetoProcessor::produce(framework::Event &event) {
         }
         // hmean, hpoint are points on the best-fit line
         hpoint = slopeVec + hmean;
+        ldmx_log(debug) << "hpoint:" << hpoint;
+          
         // linreg complete:  Now have best-fit line for 3 hits under
         // consideration Check whether the track is valid:  r^2 must be high,
         // and the track must plausibly originate from the photon
@@ -1082,7 +1081,7 @@ void EcalVetoProcessor::produce(framework::Event &event) {
         }
       }  // end loop on hits in the region
     }    // end 2nd loop on hits in the region
-
+    ldmx_log(debug) << "trackLen:" << trackLen;
     // Continue early if not hits on track
     if (trackLen == 0) continue;
 
