@@ -992,14 +992,13 @@ void EcalVetoProcessor::produce(framework::Event &event) {
       // This distance needs to be optimized in a future study //TODO
       // Current 2*cellWidth has no particular meaning
       
-      float linreg_dist_float = <float>(linreg_dist_);
+      float linreg_dist_float = (float)(linreg_dist_);
        
       if (dstToHit <= 2 * linreg_dist_float) {
         hitsInRegion[nHitsInRegion] = jHit; // TODO
         nHitsInRegion++;
       }
       ldmx_log(debug) << "Number of Hits in Region:" << nHitsInRegion;
-      ldmx_log(debug) << "linreg_dist_float:" << linreg_dist_float;
     }
 
     // Look at combinations of hits within the region (do not consider the same
@@ -1019,11 +1018,14 @@ void EcalVetoProcessor::produce(framework::Event &event) {
                          trackingHitList[hitNums[1]].pos(hInd) +
                          trackingHitList[hitNums[2]].pos(hInd)) /
                         3.0;
+          ldmx_log(debug) << "jHit:" << jHit;
+          ldmx_log(debug) << "kHit:" << kHit;
         }
         for (int hInd = 0; hInd < 3; hInd++) {
           for (int lInd = 0; lInd < 3; lInd++) {
             hdt(hInd, lInd) =
                 trackingHitList[hitNums[hInd]].pos(lInd) - hmean(lInd);
+            ldmx_log(debug) << "hInd:" << hInd;
           }
         }
 
@@ -1088,6 +1090,7 @@ void EcalVetoProcessor::produce(framework::Event &event) {
     // However, this doesn't affect the results of the simple veto. Exclude all
     // hits in a found track from further consideration:
     if (trackLen >= 2) {
+      ldmx_log(debug) << "trackLen:" << trackLen;
       nLinregTracks_++;
       for (int kHit = 0; kHit < trackLen; kHit++) {
         trackingHitList.erase(trackingHitList.begin() + track[kHit]);
