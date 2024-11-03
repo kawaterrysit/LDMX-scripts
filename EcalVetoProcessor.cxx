@@ -992,19 +992,18 @@ void EcalVetoProcessor::produce(framework::Event &event) {
       // This distance needs to be optimized in a future study //TODO
       // Current 2*cellWidth has no particular meaning
       
-      float linreg_dist_float = (float)(linreg_dist_);
+      float linreg_dist_float = linreg_dist_;
        
       if (dstToHit <= 2 * linreg_dist_float) {
         hitsInRegion[nHitsInRegion] = jHit; // TODO
         nHitsInRegion++;
       }
-      ldmx_log(debug) << "Number of Hits in Region:" << nHitsInRegion;
     }
 
     // Look at combinations of hits within the region (do not consider the same
     // combination twice):
-    //iHit -> hitsInRegion[iHit] etc
-    hitNums[0] = hitsInRegion[iHit];
+    //j/kHit -> hitsInRegion[j/kHit] etc
+    hitNums[0] = iHit;
     for (int jHit = 1; jHit < nHitsInRegion - 1; jHit++) {
       //trackingHitList.size() -> hitsInRegion.size() but .size() does not work so I use nHitsInRegion instead 
       if (nHitsInRegion < 3) break;
@@ -1046,7 +1045,6 @@ void EcalVetoProcessor::produce(framework::Event &event) {
         }
         // hmean, hpoint are points on the best-fit line
         hpoint = slopeVec + hmean;
-        ldmx_log(debug) << "hpoint:" << hpoint;
           
         // linreg complete:  Now have best-fit line for 3 hits under
         // consideration Check whether the track is valid:  r^2 must be high,
@@ -1073,15 +1071,14 @@ void EcalVetoProcessor::produce(framework::Event &event) {
         if (r_corr > r_corr_best and r_corr > .6) {
           r_corr_best = r_corr;
           trackLen = 0;
+          track[0] = iHit;
+          track[1] = jHit;
+          track[2] = kHit;
           // Only looking for 3-hit tracks currently
-          for (int k = 0; k < 3; k++) {
-            track[k] = hitNums[k];
-            trackLen++;
-          }
+          trackLen += 3;
         }
       }  // end loop on hits in the region
     }    // end 2nd loop on hits in the region
-    ldmx_log(debug) << "trackLen:" << trackLen;
     // Continue early if not hits on track
     if (trackLen == 0) continue;
 
@@ -1089,7 +1086,6 @@ void EcalVetoProcessor::produce(framework::Event &event) {
     // However, this doesn't affect the results of the simple veto. Exclude all
     // hits in a found track from further consideration:
     if (trackLen >= 2) {
-      ldmx_log(debug) << "trackLen:" << trackLen;
       nLinregTracks_++;
       for (int kHit = 0; kHit < trackLen; kHit++) {
         trackingHitList.erase(trackingHitList.begin() + track[kHit]);
